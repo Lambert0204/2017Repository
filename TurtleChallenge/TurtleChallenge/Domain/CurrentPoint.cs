@@ -2,12 +2,10 @@
 
 namespace TurtleChallenge.Domain
 {
-    public class CurrentPoint
+    public class CurrentPoint : BasePoint
     {
-
-        public int PositionX { get; set; }
-        public int PositionY { get; set; }
         public NextPoint NextPoint { get; set; }
+
         public static CurrentPoint SetCurrentPoint(int x, int y)
         {
             if (x < 0 || y < 0)
@@ -15,17 +13,14 @@ namespace TurtleChallenge.Domain
 
             return new CurrentPoint
             {
-                PositionX = x,
-                PositionY = y
+                X = x,
+                Y = y
             };
         }
 
-        public CurrentPoint Move()
+        public void MoveForward()
         {
-            this.PositionX += NextPoint.StepsOnX;
-            this.PositionY += NextPoint.StepsOnY;
-
-            return this;
+            this.Move(NextPoint.StepsOnX, NextPoint.StepsOnY);
         }
     }
 }
