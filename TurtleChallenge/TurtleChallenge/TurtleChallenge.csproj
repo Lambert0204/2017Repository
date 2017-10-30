@@ -43,12 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\BoardApp.cs" />
+    <Compile Include="Application\IBoardApp.cs" />
+    <Compile Include="Application\Text\ITransform.cs" />
+    <Compile Include="Application\Text\Transform.cs" />
+    <Compile Include="Domain\Enum\Direction.cs" />
+    <Compile Include="Domain\Enum\Rotation.cs" />
+    <Compile Include="Domain\NextPoint.cs" />
+    <Compile Include="Domain\ExitPoint.cs" />
+    <Compile Include="Domain\Mine.cs" />
+    <Compile Include="Domain\BoardSetting.cs" />
+    <Compile Include="Domain\CurrentPoint.cs" />
+    <Compile Include="DTO\Board.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
