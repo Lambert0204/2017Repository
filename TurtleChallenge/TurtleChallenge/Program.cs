@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Configuration;
 using TurtleChallenge.Application;
-using TurtleChallenge.Application.Text;
-using TurtleChallenge.Domain;
-using TurtleChallenge.Domain.Enum;
-using TurtleChallenge.DTO;
+using TurtleChallenge.Application.Transform;
 
 namespace TurtleChallenge
 {
@@ -15,13 +9,12 @@ namespace TurtleChallenge
     {
         public static void Main(string[] args)
         {
-            var filePath = @"C:\Users\USER\Documents\GitHub\2017\TurtleChallenge\TurtleChallenge\TurtleChallenge.txt";
 
-            var b = new BoardApp();
-            var c = new Transform();
-            var board = b.CreateBoard(filePath, c);
+            var a = new TransformText();
 
+            var b = new BoardApp(a);
 
+            var board = b.CreateBoardByFile(ConfigurationManager.AppSettings["FilePath"]);
 
             Console.ReadLine();
         }

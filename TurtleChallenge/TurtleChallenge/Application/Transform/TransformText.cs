@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TurtleChallenge.Domain;
 using TurtleChallenge.Domain.Enum;
 
-namespace TurtleChallenge.Application.Text
+namespace TurtleChallenge.Application.Transform
 {
-    public class Transform : ITransform
+    public class TransformText : ITransform
     {
-        public BoardSetting IntoBoardSetting(string text)
+        public BoardSetting IntoBoardSetting(string param)
         {
-            string[] boardSize = text.Split(' ');
+            string[] boardSize = param.ToString().Split(' ');
             if (boardSize.Count() != 2)
                 throw new Exception("BoardSettings: Invalid point format.");
 
             return BoardSetting.SetBoardSize(Convert.ToInt32(boardSize[0]), Convert.ToInt32(boardSize[1]));
         }
 
-        public ICollection<Mine> IntoMines(string text)
+        public ICollection<Mine> IntoMines(string param)
         {
-            string[] mines = text.Split(' ');
+            string[] mines = param.ToString().Split(' ');
             var setMines = new List<Mine>();
             foreach (var mine in mines)
             {
@@ -35,28 +33,30 @@ namespace TurtleChallenge.Application.Text
             return setMines;
         }
 
-        public ExitPoint IntoExitPoint(string text)
+        public ExitPoint IntoExitPoint(string param)
         {
-            string[] exitPoint = text.Split(' ');
+            string[] exitPoint = param.ToString().Split(' ');
             if (exitPoint.Count() != 2)
                 throw new Exception("ExitPoint: Invalid point format.");
 
             return ExitPoint.SetExitPoint(Convert.ToInt32(exitPoint[0]), Convert.ToInt32(exitPoint[1]));
         }
 
-        public CurrentPoint IntoCurrentPoint(string text)
+        public CurrentPoint IntoCurrentPoint(string param)
         {
-            string[] currentPoint = text.Split(' ');
+            string[] currentPoint = param.ToString().Split(' ');
             if (currentPoint.Count() != 3)
                 throw new Exception("CurrentPoint: Invalid point format.");
 
             var setCurrentPoint = CurrentPoint.SetCurrentPoint(Convert.ToInt32(currentPoint[0]), Convert.ToInt32(currentPoint[1]));
 
+            setCurrentPoint.NextPoint = DefineDirection(currentPoint[2]);
+
             return setCurrentPoint;
 
         }
 
-        public NextPoint IntoDirection(string text)
+        private NextPoint DefineDirection(string text)
         {
             if (text.Length != 1)
                 throw new Exception("CurrentPoint: Invalid direction format.");

@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,8 +46,9 @@
   <ItemGroup>
     <Compile Include="Application\BoardApp.cs" />
     <Compile Include="Application\IBoardApp.cs" />
-    <Compile Include="Application\Text\ITransform.cs" />
-    <Compile Include="Application\Text\Transform.cs" />
+    <Compile Include="Application\Transform\BaseTransform.cs" />
+    <Compile Include="Application\Transform\ITransform.cs" />
+    <Compile Include="Application\Transform\TransformText.cs" />
     <Compile Include="Domain\Enum\Direction.cs" />
     <Compile Include="Domain\Enum\Rotation.cs" />
     <Compile Include="Domain\NextPoint.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="Domain\Mine.cs" />
     <Compile Include="Domain\BoardSetting.cs" />
     <Compile Include="Domain\CurrentPoint.cs" />
+    <Compile Include="Domain\Position.cs" />
     <Compile Include="DTO\Board.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

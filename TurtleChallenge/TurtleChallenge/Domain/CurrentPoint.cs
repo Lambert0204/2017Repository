@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TurtleChallenge.Domain
 {
     public class CurrentPoint
     {
-        protected CurrentPoint()
-        {
-            NextPoint = new NextPoint();
-        }
 
         public int PositionX { get; set; }
         public int PositionY { get; set; }

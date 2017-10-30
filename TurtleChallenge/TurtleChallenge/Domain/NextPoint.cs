@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TurtleChallenge.Domain.Enum;
 
 namespace TurtleChallenge.Domain
 {
     public class NextPoint
     {
-
         public int StepsOnX { get; set; }
         public int StepsOnY { get; set; }
         public Direction CurrentDirection { get; set; }
@@ -70,7 +65,7 @@ namespace TurtleChallenge.Domain
                 default:
                     throw new Exception("Invalid Rotation.");
             }
-            
+
             this.SetNoOfStepsToTheNextDirection(this.CurrentDirection);
         }
     }
