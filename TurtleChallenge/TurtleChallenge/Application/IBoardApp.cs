@@ -4,6 +4,6 @@ namespace TurtleChallenge.Application
 {
     public interface IBoardApp
     {
-        Board CreateBoardByFile(string filePath);
+        Board CreateBoard();
     }
 }

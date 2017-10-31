@@ -13,20 +13,16 @@ namespace TurtleChallenge.Application
             Transform = _transform;
         }
 
-        public Board CreateBoardByFile(string filePath)
+        public Board CreateBoard()
         {
-            if (!File.Exists(filePath))
-                throw new System.Exception("File path does not exists.");
-
-            string[] lines = File.ReadAllLines(filePath);
-
             return new Board()
             {
-                BoardSetting = Transform.IntoBoardSetting(lines[0]),
-                Mines = Transform.IntoMines(lines[1]),
-                ExitPoint = Transform.IntoExitPoint(lines[2]),
-                CurrentPoint = Transform.IntoCurrentPoint(lines[3])
+                BoardSetting = Transform.IntoBoardSetting(),
+                Mines = Transform.IntoMines(),
+                ExitPoint = Transform.IntoExitPoint(),
+                Turtle = Transform.IntoTurtle()
             };
         }
+
     }
 }

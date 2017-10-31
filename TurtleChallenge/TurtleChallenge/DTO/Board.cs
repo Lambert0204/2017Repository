@@ -12,6 +12,6 @@ namespace TurtleChallenge.DTO
         public BoardSetting BoardSetting { get; set; }
         public ICollection<Mine> Mines { get; set; }
         public ExitPoint ExitPoint { get; set; }
-        public CurrentPoint CurrentPoint { get; set; }
+        public Turtle Turtle { get; set; }
     }
 }

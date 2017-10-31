@@ -46,19 +46,20 @@
   <ItemGroup>
     <Compile Include="Application\BoardApp.cs" />
     <Compile Include="Application\IBoardApp.cs" />
-    <Compile Include="Application\Transform\BaseTransform.cs" />
     <Compile Include="Application\Transform\ITransform.cs" />
-    <Compile Include="Application\Transform\TransformText.cs" />
-    <Compile Include="Domain\BasePoint.cs" />
+    <Compile Include="Application\Transform\TransformFile.cs" />
     <Compile Include="Domain\Enum\Direction.cs" />
     <Compile Include="Domain\Enum\Rotation.cs" />
-    <Compile Include="Domain\IPoint.cs" />
-    <Compile Include="Domain\NextPoint.cs" />
+    <Compile Include="Domain\Interface\IDirection.cs" />
+    <Compile Include="Domain\Interface\IPoint.cs" />
+    <Compile Include="Domain\Interface\BasePoint.cs" />
     <Compile Include="Domain\ExitPoint.cs" />
     <Compile Include="Domain\Mine.cs" />
     <Compile Include="Domain\BoardSetting.cs" />
-    <Compile Include="Domain\CurrentPoint.cs" />
+    <Compile Include="Domain\Turtle.cs" />
+    <Compile Include="Domain\Steps.cs" />
     <Compile Include="DTO\Board.cs" />
+    <Compile Include="Helper\StringExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

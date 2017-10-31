@@ -9,12 +9,13 @@ namespace TurtleChallenge
     {
         public static void Main(string[] args)
         {
+            var filePath = ConfigurationManager.AppSettings["FilePath"];
 
-            var a = new TransformText();
+            var file = new TransformFile(filePath);
 
-            var b = new BoardApp(a);
+            var boardApp = new BoardApp(file);
 
-            var board = b.CreateBoardByFile(ConfigurationManager.AppSettings["FilePath"]);
+            var board = boardApp.CreateBoard();
 
             Console.ReadLine();
         }
