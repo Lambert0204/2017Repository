@@ -10,9 +10,9 @@ namespace TurtleChallenge.Domain.Mapper
     {
         public static Turtle Map(this Turtle turtle)
         {
-            var map = Turtle.SetTurtle(turtle.X, turtle.Y, turtle.Direction);
+            var map = Turtle.Create(turtle.X, turtle.Y, turtle.Direction);
             map.Distance.SetDistance(turtle.Direction);
-            map.SetStatusMessage(String.Empty);
+            map.SetStatus(String.Empty);
             return map;
         }
     }

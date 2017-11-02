@@ -1,20 +1,20 @@
 ﻿using System;
-using TurtleChallenge.Domain.Interface;
 using TurtleChallenge.Enum;
 
 namespace TurtleChallenge.Domain
 {
-    public class Turtle : BasePoint
+    public class Turtle : Point
     {
         protected Turtle()
         {
             IgnoreDirection = false;
             Distance = new Distance();
         }
+
         public Distance Distance { get; set; }
         public string StatusMessage { get; set; }
 
-        public static Turtle SetTurtle(int x, int y, Direction direction)
+        public static Turtle Create(int x, int y, Direction direction)
         {
             if (x < 0 || y < 0)
                 throw new Exception("Invalid exit point settings. It only accepts positive integers. ");
@@ -29,6 +29,7 @@ namespace TurtleChallenge.Domain
         public void RotateTurtle(Rotation rotate)
         {
             this.Rotate(rotate);
+
             this.Distance.SetDistance(Direction);
         }
 
@@ -37,9 +38,14 @@ namespace TurtleChallenge.Domain
             this.Step(Distance.ToX, Distance.ToY);
         }
 
-        public void SetStatusMessage(string message)
+        public void SetStatus(string message)
         {
             this.StatusMessage = message;
+        }
+
+        public bool IsEqualToTurtle(int x, int y)
+        {
+            return this.IsEqual(x, y);
         }
     }
 }

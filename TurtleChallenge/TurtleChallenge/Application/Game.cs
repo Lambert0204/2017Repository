@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using TurtleChallenge.Application.Transform;
 using TurtleChallenge.Common;
 using TurtleChallenge.Domain.Mapper;
 using TurtleChallenge.DTO;
-using TurtleChallenge.Helper;
 
 namespace TurtleChallenge.Application
 {
@@ -69,8 +63,9 @@ namespace TurtleChallenge.Application
 
             else if (nextMove.IsMove())
                 this.Board.Turtle.MoveTurtleToNextStep();
+
             else
-                this.Board.Turtle.SetStatusMessage(Constants.UnknownMove);
+                this.Board.Turtle.SetStatus(Constants.UnknownMove);
 
             CheckStatus();
         }
@@ -87,11 +82,11 @@ namespace TurtleChallenge.Application
 
         public void MineHit()
         {
-            foreach(var mine in this.Board.Mines)
+            foreach (var mine in this.Board.Mines)
             {
-                if (this.Board.Turtle.IsEqual(mine.X, mine.Y))
+                if (this.Board.Turtle.IsEqualToTurtle(mine.X, mine.Y))
                 {
-                    this.Board.Turtle.SetStatusMessage(Constants.MineHit);
+                    this.Board.Turtle.SetStatus(Constants.MineHit);
                     break;
                 }
             }
@@ -99,22 +94,22 @@ namespace TurtleChallenge.Application
 
         public void Exit()
         {
-            if(this.Board.Turtle.IsEqual(this.Board.ExitPoint.X, this.Board.ExitPoint.Y))
-                this.Board.Turtle.SetStatusMessage(Constants.Success);
+            if (this.Board.Turtle.IsEqualToTurtle(this.Board.ExitPoint.X, this.Board.ExitPoint.Y))
+                this.Board.Turtle.SetStatus(Constants.Success);
         }
 
         public void OutOfTheBoard()
         {
-            if (this.Board.Turtle.X >= this.Board.BoardSetting.Length || 
+            if (this.Board.Turtle.X >= this.Board.BoardSetting.Length ||
                 this.Board.Turtle.Y >= this.Board.BoardSetting.Width ||
-                this.Board.Turtle.X < 0 || this.Board.Turtle.Y < 0 )
-                this.Board.Turtle.SetStatusMessage(Constants.WallHit);
+                this.Board.Turtle.X < 0 || this.Board.Turtle.Y < 0)
+                this.Board.Turtle.SetStatus(Constants.WallHit);
         }
 
         public void StillInDanger()
         {
             if (String.IsNullOrEmpty(this.Board.Turtle.StatusMessage))
-                this.Board.Turtle.SetStatusMessage(Constants.StillInDanger);
+                this.Board.Turtle.SetStatus(Constants.StillInDanger);
         }
         #endregion RULES
     }

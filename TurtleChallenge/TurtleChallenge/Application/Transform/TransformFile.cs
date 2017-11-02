@@ -67,7 +67,7 @@ namespace TurtleChallenge.Application.Transform
             if (!turtlePoint.IsFormatCorrect(3))
                 throw new Exception("CurrentPoint: Invalid point format.");
 
-            return Turtle.SetTurtle( turtlePoint[0].ToInt(), 
+            return Turtle.Create( turtlePoint[0].ToInt(), 
                                      turtlePoint[1].ToInt(), 
                                      turtlePoint[2].DefineDirection() );
         }

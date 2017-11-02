@@ -1,14 +1,14 @@
 ﻿using System;
-using TurtleChallenge.Domain.Interface;
 
 namespace TurtleChallenge.Domain
 {
-    public class ExitPoint : BasePoint
+    public class ExitPoint : Point
     {
         protected ExitPoint()
         {
             IgnoreDirection = true;
         }
+
         public static ExitPoint SetExitPoint(int x, int y)
         {
             if (x < 0 || y < 0)
