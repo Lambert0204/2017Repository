@@ -6,16 +6,19 @@ using TurtleChallenge.DTO;
 
 namespace TurtleChallenge.Application
 {
-    public class Game : IBoard, IRules
+    public class Game : IGame
     {
-        private ITransform Transform;
-        private BoardDto Board { get; set; }
-        public Game(ITransform _transform)
+        public ITransform Transform;
+        public IRules Rules;
+
+        public BoardDto Board;
+
+        public Game(ITransform _transform, IRules _rules)
         {
             Transform = _transform;
+            Rules = _rules;
         }
 
-        #region BOARD
         public void CreateBoard()
         {
             this.Board = new BoardDto()
@@ -27,11 +30,6 @@ namespace TurtleChallenge.Application
                 Turtle = Transform.IntoTurtle(),
                 Sequences = Transform.IntoSequences()
             };
-        }
-
-        public void Play()
-        {
-            this.ReadSequences();
         }
 
         public void ReadSequences()
@@ -59,58 +57,36 @@ namespace TurtleChallenge.Application
         public void Evaluate(string nextMove)
         {
             if (nextMove.IsRotation())
+            {
                 this.Board.Turtle.RotateTurtle(nextMove.DefineRotation());
-
+                CheckStatus();
+            }
             else if (nextMove.IsMove())
+            {
                 this.Board.Turtle.MoveTurtleToNextStep();
-
+                CheckStatus();
+            }
             else
                 this.Board.Turtle.SetStatus(Constants.UnknownMove);
-
-            CheckStatus();
         }
-        #endregion BOARD
 
         #region RULES
+
         public void CheckStatus()
         {
-            this.OutOfTheBoard();
-            this.MineHit();
-            this.Exit();
-            this.StillInDanger();
-        }
-
-        public void MineHit()
-        {
-            foreach (var mine in this.Board.Mines)
-            {
-                if (this.Board.Turtle.IsEqualToTurtle(mine.X, mine.Y))
-                {
-                    this.Board.Turtle.SetStatus(Constants.MineHit);
-                    break;
-                }
-            }
-        }
-
-        public void Exit()
-        {
-            if (this.Board.Turtle.IsEqualToTurtle(this.Board.ExitPoint.X, this.Board.ExitPoint.Y))
-                this.Board.Turtle.SetStatus(Constants.Success);
-        }
-
-        public void OutOfTheBoard()
-        {
-            if (this.Board.Turtle.X >= this.Board.BoardSetting.Length ||
-                this.Board.Turtle.Y >= this.Board.BoardSetting.Width ||
-                this.Board.Turtle.X < 0 || this.Board.Turtle.Y < 0)
+            if (Rules.OutOfTheBoard(this.Board))
                 this.Board.Turtle.SetStatus(Constants.WallHit);
-        }
 
-        public void StillInDanger()
-        {
-            if (String.IsNullOrEmpty(this.Board.Turtle.StatusMessage))
+            else if (Rules.MineHit(this.Board))
+                this.Board.Turtle.SetStatus(Constants.MineHit);
+
+            else if (Rules.Exit(this.Board))
+                this.Board.Turtle.SetStatus(Constants.Success);
+
+            else
                 this.Board.Turtle.SetStatus(Constants.StillInDanger);
         }
+
         #endregion RULES
     }
 }

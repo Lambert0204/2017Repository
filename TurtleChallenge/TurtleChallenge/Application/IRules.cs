@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TurtleChallenge.DTO;
 
 namespace TurtleChallenge.Application
 {
     public interface IRules
     {
-        void CheckStatus();
-        void MineHit();
-        void Exit();
-        void OutOfTheBoard();
-        void StillInDanger();
+        bool MineHit(BoardDto dto);
+        bool Exit(BoardDto dto);
+        bool OutOfTheBoard(BoardDto dto);
     }
 }
