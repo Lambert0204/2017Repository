@@ -1,15 +1,15 @@
 ﻿using System;
-using TurtleChallenge.Domain.Enum;
 using TurtleChallenge.Domain.Interface;
+using TurtleChallenge.Enum;
 
 namespace TurtleChallenge.Domain
 {
-    public class Steps
+    public class Distance
     {
-        protected internal int ToX { get; set; }
-        protected internal int ToY { get; set; }
+        public int ToX { get; set; }
+        public int ToY { get; set; }
 
-        public void SetSteps(Direction direction)
+        public void SetDistance(Direction direction)
         {
             switch (direction)
             {

@@ -1,6 +1,6 @@
 ﻿using System;
-using TurtleChallenge.Domain.Enum;
 using TurtleChallenge.Domain.Interface;
+using TurtleChallenge.Enum;
 
 namespace TurtleChallenge.Domain
 {
@@ -9,9 +9,10 @@ namespace TurtleChallenge.Domain
         protected Turtle()
         {
             IgnoreDirection = false;
-            NextStep = new Steps();
+            Distance = new Distance();
         }
-        public Steps NextStep { get; set; }
+        public Distance Distance { get; set; }
+        public string StatusMessage { get; set; }
 
         public static Turtle SetTurtle(int x, int y, Direction direction)
         {
@@ -20,7 +21,7 @@ namespace TurtleChallenge.Domain
 
             var point = new Turtle { X = x, Y = y, Direction = direction };
 
-            point.NextStep.SetSteps(direction);
+            point.Distance.SetDistance(direction);
 
             return point;
         }
@@ -28,12 +29,17 @@ namespace TurtleChallenge.Domain
         public void RotateTurtle(Rotation rotate)
         {
             this.Rotate(rotate);
-            this.NextStep.SetSteps(Direction);
+            this.Distance.SetDistance(Direction);
         }
 
         public void MoveTurtleToNextStep()
         {
-            this.Move(NextStep.ToX, NextStep.ToY);
+            this.Step(Distance.ToX, Distance.ToY);
+        }
+
+        public void SetStatusMessage(string message)
+        {
+            this.StatusMessage = message;
         }
     }
 }

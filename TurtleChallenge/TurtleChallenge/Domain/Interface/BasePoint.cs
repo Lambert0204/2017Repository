@@ -3,28 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TurtleChallenge.Domain.Enum;
+using TurtleChallenge.Enum;
 
 namespace TurtleChallenge.Domain.Interface
 {
     public abstract class BasePoint : IPoint, IDirection
     {
-        protected int X { get; set; }
-        protected int Y { get; set; }
-        protected bool IgnoreDirection { get; set; }
-        protected Direction Direction { get; set; }
-        public void Move(int x, int y)
-        {
-            this.X += x;
-            this.Y += y;
-        }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public bool IgnoreDirection { get; set; }
+        public Direction Direction { get; set; }
 
+        #region Point
         public void Set(int x, int y)
         {
             this.X = x;
             this.Y = y;
         }
+        public void Step(int x, int y)
+        {
+            this.X += x;
+            this.Y += y;
+        }
+        public bool IsEqual(int x, int y)
+        {
+            if (this.X == x && this.Y == y)
+                return true;
 
+            return false;
+        }
+        #endregion Point
+
+        #region Direction
         public void Set(Direction direction)
         {
             if(!IgnoreDirection)
@@ -52,5 +62,7 @@ namespace TurtleChallenge.Domain.Interface
                         throw new Exception("Invalid Rotation.");
                 }
         }
+        #endregion Direction
+
     }
 }

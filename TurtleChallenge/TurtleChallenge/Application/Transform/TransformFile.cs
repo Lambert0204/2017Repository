@@ -3,31 +3,27 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using TurtleChallenge.Common;
 using TurtleChallenge.Domain;
-using TurtleChallenge.Domain.Enum;
 using TurtleChallenge.Helper;
 
 namespace TurtleChallenge.Application.Transform
 {
     public class TransformFile : ITransform
     {
+        private string[] Lines { get; set; }
+
         public TransformFile(string filePath)
         {
-            FilePath = filePath;
+            if (!File.Exists(filePath))
+                throw new Exception("File path does not exists.");
 
-            if (!File.Exists(FilePath))
-                throw new System.Exception("File path does not exists.");
-
-            Lines = File.ReadAllLines(FilePath);
-
+            Lines = File.ReadAllLines(filePath);
         }
-
-        private string FilePath { get; set; }
-        private string[] Lines { get; set; }
 
         public BoardSetting IntoBoardSetting()
         {
-            string[] boardSize = Lines[0].Divide();
+            string[] boardSize = Lines[0].SplitInfo();
 
             if (!boardSize.IsFormatCorrect(2))
                 throw new Exception("BoardSettings: Invalid point format.");
@@ -37,20 +33,18 @@ namespace TurtleChallenge.Application.Transform
 
         public ICollection<Mine> IntoMines()
         {
-            string[] mines = Lines[1].Divide();
+            string[] mines = Lines[1].SplitInfo();
 
             var setMines = new List<Mine>();
 
             foreach (var mine in mines)
             {
-                string[] m = mine.Split(',');
+                string[] m = mine.GetAxis();
 
                 if (!m.IsFormatCorrect(2))
                     throw new Exception("Mines: Invalid point format.");
 
-                setMines.Add(
-                            Mine.SetMinePoint(m[0].ToInt(), m[1].ToInt())
-                            );
+                setMines.Add( Mine.SetMinePoint( m[0].ToInt(), m[1].ToInt() ) );
             }
 
             return setMines;
@@ -58,43 +52,41 @@ namespace TurtleChallenge.Application.Transform
 
         public ExitPoint IntoExitPoint()
         {
-            string[] exitPoint = Lines[2].Divide();
+            string[] exitPoint = Lines[2].SplitInfo();
 
             if (!exitPoint.IsFormatCorrect(2))
                 throw new Exception("ExitPoint: Invalid point format.");
 
-            return ExitPoint.SetExitPoint(exitPoint[0].ToInt(), exitPoint[1].ToInt());
+            return ExitPoint.SetExitPoint( exitPoint[0].ToInt(), exitPoint[1].ToInt() );
         }
 
         public Turtle IntoTurtle()
         {
-            string[] turtlePoint = Lines[3].Divide();
+            string[] turtlePoint = Lines[3].SplitInfo();
 
             if (!turtlePoint.IsFormatCorrect(3))
                 throw new Exception("CurrentPoint: Invalid point format.");
 
-            return Turtle.SetTurtle(turtlePoint[0].ToInt(), turtlePoint[1].ToInt(), DefineDirection(turtlePoint[2]));
+            return Turtle.SetTurtle( turtlePoint[0].ToInt(), 
+                                     turtlePoint[1].ToInt(), 
+                                     turtlePoint[2].DefineDirection() );
         }
 
-        private Direction DefineDirection(string text)
+        public ICollection<Sequence> IntoSequences()
         {
-            if (text.Length != 1)
-                throw new Exception("CurrentPoint: Invalid direction format.");
+            var sequences = new List<Sequence>();
 
-            switch (text)
-            {
-                case "N":
-                    return Direction.North;
-                case "E":
-                    return Direction.East;
-                case "S":
-                    return Direction.South;
-                case "W":
-                    return Direction.West;
-                default:
-                    throw new Exception("NextPoint: Invalid character format.");
-            }
+            var lines = Lines.ToList().GetRange(4, Lines.Count() - 4);
+
+            if (lines.Count() == 0)
+                throw new Exception("No given sequence(s).");
+
+            var sequenceNumber = Constants.InitSequenceNumber;
+
+            foreach (var line in lines)
+                sequences.Add( Sequence.SetSquence(++sequenceNumber, line.SplitInfo()) );
+
+            return sequences;
         }
-
     }
 }

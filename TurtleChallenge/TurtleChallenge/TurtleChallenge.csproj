@@ -44,21 +44,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\BoardApp.cs" />
-    <Compile Include="Application\IBoardApp.cs" />
+    <Compile Include="Application\Game.cs" />
+    <Compile Include="Application\IBoard.cs" />
+    <Compile Include="Application\IRules.cs" />
     <Compile Include="Application\Transform\ITransform.cs" />
     <Compile Include="Application\Transform\TransformFile.cs" />
-    <Compile Include="Domain\Enum\Direction.cs" />
-    <Compile Include="Domain\Enum\Rotation.cs" />
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\Definitions.cs" />
     <Compile Include="Domain\Interface\IDirection.cs" />
     <Compile Include="Domain\Interface\IPoint.cs" />
     <Compile Include="Domain\Interface\BasePoint.cs" />
     <Compile Include="Domain\ExitPoint.cs" />
+    <Compile Include="Domain\Mapper\TurtleMapper.cs" />
     <Compile Include="Domain\Mine.cs" />
     <Compile Include="Domain\BoardSetting.cs" />
+    <Compile Include="Domain\Sequence.cs" />
     <Compile Include="Domain\Turtle.cs" />
-    <Compile Include="Domain\Steps.cs" />
-    <Compile Include="DTO\Board.cs" />
+    <Compile Include="Domain\Distance.cs" />
+    <Compile Include="DTO\BoardDto.cs" />
+    <Compile Include="Enum\Direction.cs" />
+    <Compile Include="Enum\Rotation.cs" />
     <Compile Include="Helper\StringExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

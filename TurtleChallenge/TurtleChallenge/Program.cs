@@ -2,6 +2,7 @@
 using System.Configuration;
 using TurtleChallenge.Application;
 using TurtleChallenge.Application.Transform;
+using TurtleChallenge.Helper;
 
 namespace TurtleChallenge
 {
@@ -10,12 +11,11 @@ namespace TurtleChallenge
         public static void Main(string[] args)
         {
             var filePath = ConfigurationManager.AppSettings["FilePath"];
-
             var file = new TransformFile(filePath);
 
-            var boardApp = new BoardApp(file);
-
-            var board = boardApp.CreateBoard();
+            var game = new Game(file);
+            game.CreateBoard();
+            game.Play();
 
             Console.ReadLine();
         }

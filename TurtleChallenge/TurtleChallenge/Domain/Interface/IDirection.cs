@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TurtleChallenge.Domain.Enum;
+using TurtleChallenge.Enum;
 
 namespace TurtleChallenge.Domain.Interface
 {

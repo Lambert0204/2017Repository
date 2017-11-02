@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TurtleChallenge.Domain.Enum
+namespace TurtleChallenge.Enum
 {
-    public enum Rotation 
+    public enum Direction
     {
-        Left,
-        Right
+        North,
+        East,
+        South,
+        West
     }
 }

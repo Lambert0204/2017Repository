@@ -9,5 +9,6 @@ namespace TurtleChallenge.Application.Transform
         ICollection<Mine> IntoMines();
         ExitPoint IntoExitPoint();
         Turtle IntoTurtle(); //Note: This will also be the starting point.
+        ICollection<Sequence> IntoSequences();
     }
 }

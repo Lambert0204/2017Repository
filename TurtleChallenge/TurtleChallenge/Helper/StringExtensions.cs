@@ -8,14 +8,14 @@ namespace TurtleChallenge.Helper
 {
     public static class StringExtensions
     {
-        public static int TextCount(this String[] lists)
-        {
-            return lists.Count();
-        }
-
-        public static string[] Divide(this String text)
+        public static string[] SplitInfo(this String text)
         {
             return text.Split(' ');
+        }
+
+        public static string[] GetAxis(this String text)
+        {
+            return text.Split(',');
         }
 
         public static int ToInt(this object obj)
