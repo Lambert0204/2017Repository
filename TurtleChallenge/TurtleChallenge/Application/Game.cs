@@ -74,13 +74,13 @@ namespace TurtleChallenge.Application
 
         public void CheckStatus()
         {
-            if (Rules.OutOfTheBoard(this.Board))
+            if (Rules.OutOfTheBoard(this.Board.BoardSetting, this.Board.Turtle))
                 this.Board.Turtle.SetStatus(Constants.WallHit);
 
-            else if (Rules.MineHit(this.Board))
+            else if (Rules.MineHit(this.Board.Mines, this.Board.Turtle))
                 this.Board.Turtle.SetStatus(Constants.MineHit);
 
-            else if (Rules.Exit(this.Board))
+            else if (Rules.Exit(this.Board.ExitPoint, this.Board.Turtle))
                 this.Board.Turtle.SetStatus(Constants.Success);
 
             else

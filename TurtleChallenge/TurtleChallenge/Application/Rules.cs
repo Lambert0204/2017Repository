@@ -1,14 +1,15 @@
-﻿using TurtleChallenge.DTO;
+﻿using System.Collections.Generic;
+using TurtleChallenge.Domain;
 
 namespace TurtleChallenge.Application
 {
     public class Rules : IRules
     {
-        public bool MineHit(BoardDto dto)
+        public bool MineHit(ICollection<Mine> m, Turtle t)
         {
-            foreach (var mine in dto.Mines)
+            foreach (var mine in m)
             {
-                if (dto.Turtle.IsEqualToTurtle(mine.X, mine.Y))
+                if (t.IsEqualToTurtle(mine.X, mine.Y))
                 {
                     return true;
                 }
@@ -16,19 +17,17 @@ namespace TurtleChallenge.Application
             return false;
         }
 
-        public bool Exit(BoardDto dto)
+        public bool Exit(ExitPoint e, Turtle t)
         {
-            if (dto.Turtle.IsEqualToTurtle(dto.ExitPoint.X, dto.ExitPoint.Y))
+            if (t.IsEqualToTurtle(e.X, e.Y))
                 return true;
 
             return false;
         }
 
-        public bool OutOfTheBoard(BoardDto dto)
+        public bool OutOfTheBoard(BoardSetting bs, Turtle t)
         {
-            if (dto.Turtle.X >= dto.BoardSetting.Length ||
-                dto.Turtle.Y >= dto.BoardSetting.Width ||
-                dto.Turtle.X < 0 || dto.Turtle.Y < 0)
+            if (t.X >= bs.Length || t.Y >= bs.Width || t.X < 0 || t.Y < 0)
                 return true;
 
             return false;
